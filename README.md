@@ -2,7 +2,9 @@
 Cambridge (A Level) pseudocode to C++(20) transpiler.
 
 # Usage
-You are free to use anything provided, for non-commercial use. You may **not** sell:
+You are free to use anything provided, for non-commercial use. 
+
+You may **not** sell:
 - Source code
 - Transpiled code
 - This transpilation as a service
@@ -12,8 +14,16 @@ You are free to use anything provided, for non-commercial use. You may **not** s
   This product is provided AS IS, WITHOUT ANY WARRANTY for ANY PURPOSE.
   Use it at your own discretion.
 
+# Requirements
+- A standard C++ compiler with (complete) C++20 support is required
+- The commands provided work ONLY for g++ (GNU C++ compiler). You will need different commands for other compilers
+
 # Contributing
   You are wellcome to open a pull request, or open an issue, or ask for help in discussions.
+
+# Benefits
+- You can run pseudocode locally, for free
+- Your pseudcode runs as fast as a C++ program, especially due to compiler optimisations
 
 # Limitations:
 - Using (x, y : REAL) etcetra in functions. Ever variable has to be marked explicitly. (BYREF and BYVAL works properly)
