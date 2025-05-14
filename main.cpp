@@ -1,4 +1,4 @@
-#include ".Includes/includes.h"
+#include "Includes/includes.h"
 
 #include <sstream>
 #include <fstream>
@@ -224,7 +224,7 @@ int main() {
     clog.rdbuf(oldrdbuf_clog);
     cerr.rdbuf(oldrdbuf_cerr);
 
-#if defined(__linux__) || defined(__APPLE__)
+#if defined(__linux__) || defined(__bsd__) || defined(__APPLE__)
     std::ignore = std::system("clear");
 #elif defined(_WIN32) || defined(_WIN64)
     std::ignore = std::system("cls");

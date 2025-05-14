@@ -260,7 +260,12 @@ inline constexpr char LCASE (char x) noexcept {
     return static_cast<char>(std::tolower(x));
 }
 
-inline constexpr std::string TO_UPPER(const std::string& x) noexcept {
+
+template <typename T>
+concept is_str_or_char = std::convertible_to<T, std::string> || std::same_as<T, char>; 
+
+
+inline constexpr std::string TO_UPPER(const is_str_or_char auto& x) noexcept {
     std::string result{};
     result.reserve(x.length());
     for (const char& c : x) {
@@ -269,7 +274,7 @@ inline constexpr std::string TO_UPPER(const std::string& x) noexcept {
     return result;
 }
 
-inline constexpr std::string TO_LOWER(const std::string& x) noexcept {
+inline constexpr std::string TO_LOWER(const is_str_or_char auto& x) noexcept {
     std::string result{};
     result.reserve(x.length());
     for (const char& c : x) {
