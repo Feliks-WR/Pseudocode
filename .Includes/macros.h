@@ -1,1 +1,2 @@
-// #define OUTPUT()
+#pragma once
+// empty

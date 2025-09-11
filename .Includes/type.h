@@ -3,10 +3,12 @@
 #ifndef TYPE_H_
 #define TYPE_H_
 
+#include <stdexcept>
 #include <unordered_map>
 #include <string>
 
 
+// ReSharper disable once CppUnnamedNamespaceInHeaderFile
 namespace {
     using umap = std::unordered_map<std::string, std::string>;
 
