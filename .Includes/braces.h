@@ -2,15 +2,14 @@
 #ifndef BRACES_H_
 #define BRACES_H_
 
+#include <algorithm>
 #include <string>
 #include <initializer_list>
 
 
 inline bool starts_with(const std::string& line, const std::initializer_list<std::string>& vars)
 {
-    for (std::string x : vars)
-        if (line.starts_with(x))
-            return true;
+    std::ranges::any_of(vars, [&line](const auto& x) { return line.starts_with(x); });
     
     return false;
 }

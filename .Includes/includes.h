@@ -1,3 +1,4 @@
+#pragma once
 #include "output.h"
 #include "input.h"
 #include "declare.h"
