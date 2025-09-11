@@ -6,14 +6,13 @@
 #include "whitespace.h"
 
 
-std::string parseType(const std::string& _line)
+inline std::string parseType(const std::string& _line)
 {
-    std::string line = trim_whitespace(_line);
-    return "struct " + line.substr(4) + " {\n";
+    return "struct " + trim_whitespace(_line).substr(4) + " {\n";
 }
 
 
-std::string endTypeEquivalent() {
+inline std::string endTypeEquivalent() {
     return "};";
 }
 

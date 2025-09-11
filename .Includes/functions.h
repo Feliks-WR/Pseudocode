@@ -6,8 +6,10 @@
 
 #include <string>
 
+#include "Includes/whitespace.h"
 
-std::string parseArguments(const std::string& _line)
+
+inline std::string parseArguments(const std::string& _line)
 {
     std::string line{ trim_whitespace(_line) };
 
@@ -84,13 +86,13 @@ std::string parseArguments(const std::string& _line)
 }
 
 
-std::string parseReturn(const std::string& line)
+inline std::string parseReturn(const std::string& line)
 {
     return "return " + line.substr(6) + ";";
 }
 
 
-std::string parseProcedure(const std::string& line)
+inline std::string parseProcedure(const std::string& line)
 {
     const std::string name = line.substr(9, line.find('(') - 9);
 
@@ -101,13 +103,13 @@ std::string parseProcedure(const std::string& line)
 }
 
 
-std::string callEquivalent(const std::string& line)
+inline std::string callEquivalent(const std::string& line)
 {
     return line.substr(5) + ";\n";
 }
 
 
-std::string parseFunction(const std::string& _line)
+inline std::string parseFunction(const std::string& _line)
 {
     std::string line = _line;
     for (std::size_t i = 0; i < line.size(); i++) {

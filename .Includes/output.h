@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 
-bool contextIsParenthesis (const std::string& line, std::size_t pos) 
+inline bool contextIsParenthesis (const std::string& line, std::size_t pos)
 {
     if (line.rfind(")", pos) != std::string::npos || line.find("(", pos) != std::string::npos)
         return false;
@@ -18,7 +18,7 @@ bool contextIsParenthesis (const std::string& line, std::size_t pos)
 }
 
 
-std::string parseOutputString(const std::string& line) 
+inline std::string parseOutputString(const std::string& line)
 {
     std::string result = "std::cout";
     size_t pos = line.find("OUTPUT") + 6;

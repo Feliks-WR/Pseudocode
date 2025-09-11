@@ -6,7 +6,7 @@
 #include <initializer_list>
 
 
-bool starts_with(const std::string& line, const std::initializer_list<std::string>& vars)
+inline bool starts_with(const std::string& line, const std::initializer_list<std::string>& vars)
 {
     for (std::string x : vars)
         if (line.starts_with(x))
@@ -16,7 +16,7 @@ bool starts_with(const std::string& line, const std::initializer_list<std::strin
 }
 
 
-std::string replaceOpening(const std::string& line)
+inline std::string replaceOpening(const std::string& line)
 {
     if (::starts_with(line, {"THEN"})) {
         return "{";
@@ -25,7 +25,7 @@ std::string replaceOpening(const std::string& line)
 }
 
 
-std::string replaceClosing(const std::string& line)
+inline std::string replaceClosing(const std::string& line)
 {
     if (::starts_with(line, {"ENDIF", "ENDWHILE", "ENDPROCEDURE", "ENDFUNCTION"})) {
         return "}";

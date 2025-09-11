@@ -13,7 +13,7 @@ template <typename T>
 concept char_or_sv = std::same_as<T, char> || std::same_as<T, std::string_view>;
 
 
-constexpr inline std::vector<std::string> split (std::string_view sv, char_or_sv auto delim) noexcept
+constexpr std::vector<std::string> split (std::string_view sv, char_or_sv auto delim) noexcept
 {
     std::vector<std::string> result{};
     std::size_t pos{ std::string::npos };

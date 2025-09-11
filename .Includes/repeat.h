@@ -5,13 +5,14 @@
 #include <string>
 
 
-std::string repeatEquivilant()
+inline std::string repeatEquivilant()
 {
     return "do{";
 }
 
 
-std::string parseUntil(const std::string& line)
+// ReSharper disable once CppDFAConstantFunctionResult
+inline std::string parseUntil(const std::string& line)
 {
     std::string result = "}while(!(";
     result.append(line.substr(6)).append("));");

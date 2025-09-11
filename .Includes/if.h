@@ -5,7 +5,7 @@
 #include <string>
 
 
-std::string parseIf(const std::string& line)
+inline std::string parseIf(const std::string& line)
 {
     std::string result = line.substr(2);
     std::size_t then_pos = line.find("THEN");
@@ -22,7 +22,7 @@ std::string parseIf(const std::string& line)
 }
 
 
-std::string parseElse(const std::string& line)
+inline std::string parseElse(const std::string& line)
 {
     return "}else{";
 }

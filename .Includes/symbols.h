@@ -8,7 +8,7 @@
 #include <stdexcept>
 
 
-bool contextIsString(const std::string& line, size_t pos, std::initializer_list<char> delims = {'\"'})
+inline bool contextIsString(const std::string& line, size_t pos, std::initializer_list<char> delims = {'\"'})
 {
     bool isInString { false };
 
@@ -24,7 +24,7 @@ bool contextIsString(const std::string& line, size_t pos, std::initializer_list<
 }
 
 
-std::string parseSymbols(const std::string& _line)
+inline std::string parseSymbols(const std::string& _line)
 {    
     std::string line = _line;
 

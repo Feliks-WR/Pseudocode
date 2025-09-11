@@ -14,7 +14,7 @@
 #include "cstring.h"
 
 
-std::string parseDeclareString(const std::string& line)
+inline std::string parseDeclareString(const std::string& line)
 {
     std::string processed_line = trim_whitespace(line);
 

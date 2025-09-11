@@ -6,7 +6,7 @@
 #include <string>
 
 
-std::string parseInputString(const std::string& line)
+inline std::string parseInputString(const std::string& line)
 {
     return "std::cin>>" + line.substr(6) + ';';
 }

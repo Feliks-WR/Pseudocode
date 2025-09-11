@@ -5,7 +5,7 @@
 #include <string>
 
 
-std::string parseFor(const std::string& _line)
+inline std::string parseFor(const std::string& _line)
 {
     std::string result = "for(";
     const std::string line = _line.substr(3);
@@ -27,7 +27,7 @@ std::string parseFor(const std::string& _line)
 }
 
 
-std::string nextEquivalent()
+inline std::string nextEquivalent()
 {
     return "}";
 }
