@@ -9,8 +9,10 @@
 
 inline bool starts_with(const std::string& line, const std::initializer_list<std::string>& vars)
 {
-    std::ranges::any_of(vars, [&line](const auto& x) { return line.starts_with(x); });
-    
+    for (std::string x : vars)
+        if (line.starts_with(x))
+            return true;
+
     return false;
 }
 
