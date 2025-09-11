@@ -12,9 +12,9 @@ using namespace cstring;
 using namespace std;
 
 
-constexpr czstring COMMON_INCLUDES = "#include \"custom_lib.h\"\n";
-constexpr czstring MAIN_START = "\n\nint main() {\n\tstd::cout.setf(std::ios::boolalpha);\n";
-constexpr czstring MAIN_END = "\treturn 0;\n}";
+constexpr auto COMMON_INCLUDES = "#include \"custom_lib.h\"\n";
+constexpr auto MAIN_START = "\n\nint main() {\n\tstd::cout.setf(std::ios::boolalpha);\n";
+constexpr auto MAIN_END = "\treturn 0;\n}";
 
 
 #if __cplusplus < 202002L
