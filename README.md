@@ -23,13 +23,14 @@ You may **not** sell:
 
 # Benefits
 - You can run pseudocode locally, for free
-- Your pseudcode runs as fast as a C++ program, especially due to compiler optimisations
+- Your pseudcode runs about as fast as a C++ program, especially due to compiler optimizations
 
 # Limitations:
 - Using (x, y : REAL) etcetra in functions. Ever variable has to be marked explicitly. (BYREF and BYVAL works properly)
 - Use of pointers is not supported yet
-- The code produced is *not* meant to be human readable. It is meant for execution
-- Arrays are declared without any colons. Just specify their dimensions
+- The code produced is *not* meant to be human readable.
+- ~Arrays are declared without any colons. Just specify their dimensions~ Fixed
+- Only 1-indexed arrays will be accepted
 - Using DO after while, or using MOD as a function, and other O level formats will currently NOT work
 - The error messages may be a bit cryptic, if you do not understand c++. Open the most recent log file in the logs folder, and you'll see slightly more friendly messages
 - WRONG CODE CAN RUN. IF IT RUNS, DOESN'T MEAN IT IS FREE OF SYNTAX ERRORS!
