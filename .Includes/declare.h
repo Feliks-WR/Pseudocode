@@ -16,15 +16,18 @@ inline std::string parseDeclareString(const std::string& line)
 {
     std::string processed_line = trim_whitespace(line);
 
-    if (line.length() < 8 || line.substr(0, 7) != "DECLARE") {
-         std::cerr << "Error: DECLARE statement format invalid (missing 'DECLARE ' prefix) in line: " << line << std::endl;
-         return "#error Invalid DECLARE statement (prefix)\n";
+    if (line.length() < 8 || line.substr(0, 7) != "DECLARE")
+    {
+        std::cerr << "Error: DECLARE statement format invalid (missing 'DECLARE ' prefix) in line: "
+            << line << std::endl;
+        return "#error Invalid DECLARE statement (prefix)\n";
     }
     processed_line = processed_line.substr(7);
 
     const std::size_t colon_pos = processed_line.find(':');
 
-    if (colon_pos == std::string::npos || colon_pos == 0 || colon_pos == processed_line.length() - 1) {
+    if (colon_pos == std::string::npos || colon_pos == 0 || colon_pos == processed_line.length() - 1)
+    {
         std::cerr << "Error: DECLARE format invalid (missing or misplaced ':') in line: " << line << std::endl;
         return "#error Invalid DECLARE statement (format)\n";
     }
@@ -39,22 +42,27 @@ inline std::string parseDeclareString(const std::string& line)
 
     std::vector<std::string> sizes{};
 
-    if (array_pos != std::string::npos) {
+    if (array_pos != std::string::npos)
+    {
         const std::size_t start_pos = trimmed_type.find('[');
         const std::size_t end_pos = trimmed_type.find(']', start_pos + 1);
-        if (start_pos != std::string::npos && end_pos != std::string::npos) {
+        if (start_pos != std::string::npos && end_pos != std::string::npos)
+        {
             sizes = ::split(trimmed_type.substr(start_pos + 1, end_pos - start_pos - 1), ',');
         }
-        else {
+        else
+        {
             std::cerr << "Error: Invalid array declaration in DECLARE statement in line: " << line << std::endl;
             return "#error \"Invalid array declaration\"\n";
         }
 
         const std::size_t of_pos = trimmed_type.find("OF");
-        if (of_pos != std::string::npos) {
+        if (of_pos != std::string::npos)
+        {
             cpp_type = type_map.at(trimmed_type.substr(of_pos + 2));
         }
-        else {
+        else
+        {
             std::cerr << "Error: Invalid array type in DECLARE statement in line: " << line << std::endl;
             return "#error Invalid array type\n";
         }
@@ -64,47 +72,54 @@ inline std::string parseDeclareString(const std::string& line)
 
     std::string trimmed_names_str = trim_whitespace(names_str);
 
-    if (trimmed_names_str.empty()) {
-         std::cerr << "Error: No variable names specified in DECLARE statement in line: " << line << std::endl;
-         return "#error DECLARE statement has no variable names\n";
+    if (trimmed_names_str.empty())
+    {
+        std::cerr << "Error: No variable names specified in DECLARE statement in line: " << line << std::endl;
+        return "#error DECLARE statement has no variable names\n";
     }
 
     std::stringstream ss(trimmed_names_str);
     std::string segment;
     std::vector<std::string> names;
 
-    while(std::getline(ss, segment, ',')) {
-       std::string trimmed_segment = trim_whitespace(segment);
-       if (!trimmed_segment.empty()) { // Only add non-empty names
-           names.push_back(trimmed_segment);
-       }
+    while (std::getline(ss, segment, ','))
+    {
+        std::string trimmed_segment = trim_whitespace(segment);
+        if (!trimmed_segment.empty())
+        {
+            // Only add non-empty names
+            names.push_back(trimmed_segment);
+        }
     }
 
-    if (names.empty()) {
-         std::cerr << "Error: No valid variable names found after parsing in line: " << line << std::endl;
-         return "#error DECLARE statement parsing resulted in no valid names\n";
+    if (names.empty())
+    {
+        std::cerr << "Error: No valid variable names found after parsing in line: " << line << std::endl;
+        return "#error DECLARE statement parsing resulted in no valid names\n";
     }
 
     std::string joined_names;
-    
-    for (size_t i = 0; i < names.size(); ++i) {
+
+    for (size_t i = 0; i < names.size(); ++i)
+    {
         joined_names += names[i];
-        if (i < names.size() - 1) {
+        if (i < names.size() - 1)
+        {
             joined_names += ", ";
         }
     }
 
-    if (array_pos != std::string::npos) {
+    if (array_pos != std::string::npos)
+    {
         const std::string array_type = cpp_type;
         cpp_type = "";
         for (const std::string& size : sizes)
             cpp_type += "_1_ARRAY<";
-        
+
         cpp_type += array_type;
 
-        for (const std::string& size : sizes | std::views::reverse) 
+        for (const std::string& size : sizes | std::views::reverse)
             cpp_type += "," + size + ">";
-        
     }
 
     return cpp_type + " " + joined_names + ";";

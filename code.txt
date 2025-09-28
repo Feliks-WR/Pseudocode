@@ -1,3 +1,15 @@
 // PSUEDOCODE:
 
-OUTPUT "HELLO WORLD!"
+DECLARE n : ARRAY[1:10] OF INTEGER
+OUTPUT "Enter a positive integer: "
+INPUT n[1]
+IF n[1] < 0 THEN
+    OUTPUT "Error: Please enter a positive integer."
+ELSE
+    DECLARE factorial : INTEGER
+    factorial <-- 1
+    FOR i <-- 1 TO n[1]
+        factorial <-- factorial * i
+    NEXT
+    OUTPUT "Factorial = ", factorial
+ENDIF

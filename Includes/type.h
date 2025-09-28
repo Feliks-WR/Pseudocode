@@ -32,7 +32,7 @@ namespace {
 
 
 const type_map_t type_map = {
-    {"INTEGER", "int"},
+    {"INTEGER", "long"},
     {"STRING", "_1_STRING"},
     {"REAL", "double"},
     {"CHAR", "char"},

@@ -9,17 +9,14 @@
 
 inline bool starts_with(const std::string& line, const std::initializer_list<std::string>& vars)
 {
-    for (std::string x : vars)
-        if (line.starts_with(x))
-            return true;
-
-    return false;
+    return std::ranges::any_of(vars, [&](const std::string& x) { return line.starts_with(x); });
 }
 
 
 inline std::string replaceOpening(const std::string& line)
 {
-    if (::starts_with(line, {"THEN"})) {
+    if (::starts_with(line, {"THEN"}))
+    {
         return "{";
     }
     return line;
@@ -28,7 +25,8 @@ inline std::string replaceOpening(const std::string& line)
 
 inline std::string replaceClosing(const std::string& line)
 {
-    if (::starts_with(line, {"ENDIF", "ENDWHILE", "ENDPROCEDURE", "ENDFUNCTION"})) {
+    if (::starts_with(line, {"ENDIF", "ENDWHILE", "ENDPROCEDURE", "ENDFUNCTION"}))
+    {
         return "}";
     }
     return line;

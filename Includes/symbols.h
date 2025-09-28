@@ -8,7 +8,7 @@
 #include <stdexcept>
 
 
-bool contextIsString(const std::string& line, size_t pos, std::initializer_list<char> delims = {'\"'})
+inline bool contextIsString(const std::string& line, size_t pos, std::initializer_list<char> delims = {'\"'})
 {
     bool isInString { false };
 
@@ -24,6 +24,7 @@ bool contextIsString(const std::string& line, size_t pos, std::initializer_list<
 }
 
 
+// ReSharper disable once CppNonInlineFunctionDefinitionInHeaderFile
 std::string parseSymbols(const std::string& _line)
 {    
     std::string line = _line;
@@ -35,19 +36,29 @@ std::string parseSymbols(const std::string& _line)
                 && line.at(pos + 1) != '>' && line.at(pos + 1) != '<' && line.at(pos - 1) != '>' && line.at(pos - 1) != '<')
                 line.insert(pos, "=");
         }
-        catch (const std::out_of_range& e) {
+        catch (const std::out_of_range&)
+        {
             line.insert(pos, "=");
         }
 
         pos = line.find('=', pos + 1);
     }
 
-    pos = line.find("\"");
+    pos = line.find('\"');
     while (pos != std::string::npos && line.substr(pos + 1, 2) != "_s") {
         if (!contextIsString(line, pos+1))
             line.insert(pos+1, "_s");
 
-        pos = line.find("\"", pos + 1);
+        pos = line.find('\"', pos + 1);
+    }
+
+    pos = line.rfind(':');
+    if (pos != std::string::npos && !contextIsString(line, pos) && contextIsString(line, pos, {'[', ']'}))
+    {
+        if (line.at(pos - 1) != '1' && line.at(pos - 1) != '[' && line.at(pos - 1) != ','
+            && line.at(pos - 1) != ' ')
+            return "#error \"Only 1-indexed arrays are supported\"\t" + line;
+        line.replace(pos - 1, 2, "");
     }
 
     pos = line.find(',');
@@ -61,7 +72,7 @@ std::string parseSymbols(const std::string& _line)
     if (pos != std::string::npos && !contextIsString(line, pos))
         line.replace(pos, 2, "!=");
 
-    pos = line.find("&");
+    pos = line.find('&');
     if (pos != std::string::npos && !contextIsString(line, pos))
         line.replace(pos, 1, "+");
 

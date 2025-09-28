@@ -2,5 +2,6 @@
 /.idea
 /main
 /output-code
+/output-code.cpp
 /code.txt
 /CMakeLists.txt

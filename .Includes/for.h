@@ -9,8 +9,8 @@ inline std::string parseFor(const std::string& _line)
 {
     std::string result = "for(";
     const std::string line = _line.substr(3);
-    
-    const std::size_t eq_pos = line.find("=");
+
+    const std::size_t eq_pos = line.find('=');
     const std::size_t to_pos = line.find("TO", eq_pos);
     const std::size_t step_pos = line.find("STEP", to_pos);
 

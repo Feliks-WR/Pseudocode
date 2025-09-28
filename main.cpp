@@ -199,7 +199,7 @@ void parseAll(czstring codeFile, czstring outputFile) {
     outputWriter << MAIN_START;
 
     intermediate_2.clear();
-    intermediate_2.seekg(pos_end_of_last_module == string::npos ? 0ul : pos_end_of_last_module);
+    intermediate_2.seekg(pos_end_of_last_module == string::npos ? 0l : static_cast<long>(pos_end_of_last_module));
 
     convert_to_cpp(nullopt);       // after main function
 
@@ -212,10 +212,10 @@ void parseAll(czstring codeFile, czstring outputFile) {
 }
 
 int main() {
-    czstring codeFile = "code.txt";
-    czstring outputFile = "output-code.cpp";
+    const auto codeFile = "code.txt";
+    const auto outputFile = "output-code.cpp";
 
-    ofstream ofs("logs/" __TIMESTAMP__ ".txt");
+    const ofstream ofs("logs/" __TIMESTAMP__ ".txt");
     streambuf* oldrdbuf_clog = clog.rdbuf(ofs.rdbuf());
     streambuf* oldrdbuf_cerr = cerr.rdbuf(ofs.rdbuf());
 
@@ -224,12 +224,13 @@ int main() {
     clog.rdbuf(oldrdbuf_clog);
     cerr.rdbuf(oldrdbuf_cerr);
 
+#ifdef TERM
 #if defined(__linux__) || defined(__bsd__) || defined(__APPLE__)
     std::ignore = std::system("clear");
 #elif defined(_WIN32) || defined(_WIN64)
     std::ignore = std::system("cls");
 #endif
-
+#endif
 
     return 0;
 }

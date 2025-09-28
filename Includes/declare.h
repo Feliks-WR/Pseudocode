@@ -12,8 +12,10 @@
 #include <iostream>
 #include <stdexcept>
 #include "cstring.h"
+#include "symbols.h"
 
 
+// ReSharper disable once CppNonInlineFunctionDefinitionInHeaderFile
 std::string parseDeclareString(const std::string& line)
 {
     std::string processed_line = trim_whitespace(line);
@@ -26,7 +28,9 @@ std::string parseDeclareString(const std::string& line)
 
     const std::size_t colon_pos = processed_line.find(':');
 
-    if (colon_pos == std::string::npos || colon_pos == 0 || colon_pos == processed_line.length() - 1) {
+    if (!contextIsString(line, colon_pos, {'[', ']'}) &&
+        (colon_pos == std::string::npos || colon_pos == 0 || colon_pos == processed_line.length() - 1))
+    {
         std::cerr << "Error: DECLARE format invalid (missing or misplaced ':') in line: " << line << std::endl;
         return "#error Invalid DECLARE statement (format)\n";
     }
